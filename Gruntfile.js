@@ -7,7 +7,7 @@ module.exports = function(grunt) {
       development: {
         options: {
           paths: ["css"],
-          report: 'min'
+          compress: true
         },
         files: {
           "css/build/build.css": "css/main.less"
