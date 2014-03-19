@@ -3,10 +3,14 @@
     <link rel="stylesheet" href="css/build/build.css" />
 </head>
 <body>
-    <div id="header">
-        <div class="navigation logo">
-            Ciao
-        </div>
-    </div>
+    <h1>Lesstry</h1>
+    <svg class="chart"></svg>
+    <script src="js/build/build.min.js"></script>
+    <script>
+        var data = [10, 20, 15, 35, 11, 22];
+        (new Chart()).element(".chart").width(420)
+        .barHeight(20).data(data).draw();
+    </script>
 </body>
+
 </html>

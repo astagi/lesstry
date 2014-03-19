@@ -1,9 +1,13 @@
-#header {
-  color: red;
-  .navigation {
-    font-size: 42px;
-  }
-  .logo {
-    width: 300px;
-  }
+@chartcolor: green;
+
+.chart {
+    rect {
+        fill: @chartcolor;
+    }
+
+    text {
+        fill: white;
+        font: 10px sans-serif;
+        text-anchor: end;
+    }
 }

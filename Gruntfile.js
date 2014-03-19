@@ -1,8 +1,14 @@
 module.exports = function(grunt) {
 
-  // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    uglify: {
+      my_target: {
+        files: {
+          'js/build/build.min.js': ['js/d3.min.js', 'js/chart.js']
+        }
+      }
+    },
     less: {
       development: {
         options: {
@@ -16,10 +22,9 @@ module.exports = function(grunt) {
     }
   });
 
-  // Load the plugin that provides the "uglify" task.
   grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
 
-  // Default task(s).
-  grunt.registerTask('default', ['less']);
+  grunt.registerTask('default', ['uglify','less']);
 
 };
