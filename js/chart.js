@@ -6,33 +6,47 @@ function Chart() {
     return this;
 };
 
-Chart.prototype.element = function(element) {
+Chart.prototype.setElement = function(element) {
     this._element = element;
     return this;
 };
 
-Chart.prototype.width = function(width) {
+Chart.prototype.setWidth = function(width) {
     this._width = width;
     return this;
 };
 
-Chart.prototype.barHeight = function(barHeight) {
+Chart.prototype.setBarHeight = function(barHeight) {
     this._barHeight = barHeight;
     return this;
 };
 
-Chart.prototype.data = function(data) {
+Chart.prototype.setData = function(data) {
     this._data = data;
     return this;
 };
 
-Chart.prototype.draw  = function() {
+Chart.prototype.getMaxElement = function(field)  {
+    var max = this._data[0][field];
+    for(var i = 1 ; i < this._data.length ; i++) {
+        if(this._data[i][field] > max) {
+            max = this._data[i][field];
+        }
+    }
+    return max;
+};
+
+Chart.prototype.draw  = function(labelvalue) {
+    if(typeof(labelvalue)==='undefined')
+        labelvalue = ['label','value'];
+    var label = labelvalue[0];
+    var value = labelvalue[1];
     var element = this._element;
     var width = this._width;
     var barHeight = this._barHeight;
     var data = this._data;
     var x = d3.scale.linear()
-        .domain([0, d3.max(data)])
+        .domain([0, this.getMaxElement(value)])
         .range([0, width]);
 
     var chart = d3.select(element)
@@ -45,12 +59,12 @@ Chart.prototype.draw  = function() {
         .attr("transform", function(d, i) { return "translate(0," + i * barHeight + ")"; });
 
     bar.append("rect")
-        .attr("width", x)
+        .attr("width", function(d) { return x(d[value])})
         .attr("height", barHeight - 1);
 
     bar.append("text")
-        .attr("x", function(d) { return x(d) - 3; })
+        .attr("x", function(d) { return x(d[value]) - 3; })
         .attr("y", barHeight / 2)
         .attr("dy", ".30em")
-        .text(function(d, i) { return "(" + (i + 1) + ")" + d; });
+        .text(function(d, i) { return "(" + (d[label]) + ")" + d[value]; });
 };

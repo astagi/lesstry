@@ -7,9 +7,12 @@
     <svg class="chart"></svg>
     <script src="js/build/build.min.js"></script>
     <script>
-        var data = [10, 20, 15, 35, 11, 22];
-        (new Chart()).element(".chart").width(420)
-        .barHeight(20).data(data).draw();
+        var data = [{label : 'First choice', value : 10},
+                    {label : 'Second choice', value : 20},
+                    {label : 'Third choice', value : 15},
+                    {label : 'Fourth choice', value : 12},];
+        (new Chart()).setElement(".chart").setWidth(420)
+        .setBarHeight(20).setData(data).draw();
     </script>
 </body>
 
